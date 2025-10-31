@@ -1,0 +1,5 @@
+# IDE Configuration
+
+.idea/
+.vscode/
+*.iml
