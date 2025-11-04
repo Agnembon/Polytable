@@ -4,7 +4,7 @@ import { SelectionRange } from "@/models/SelectionRange.ts";
 
 export const useSelection = () => {
   const [selection, setSelection] = useState<SelectionRange | null>(null);
-  const isSelecting = useRef(false);
+  const isSelecting = useRef<boolean>(false);
 
   useEffect(() => {
     const handleMouseUp = () => (isSelecting.current = false);
@@ -21,7 +21,7 @@ export const useSelection = () => {
   const handleMouseEnter = (cell: CellPosition) => {
     if (!isSelecting.current || !selection) return;
 
-    if (selection.updateEnd(cell)) {
+    if (selection.withEnd(cell)) {
       setSelection(new SelectionRange(selection.start, selection.end));
     }
   };

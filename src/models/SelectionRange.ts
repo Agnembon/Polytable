@@ -3,7 +3,7 @@ import type { CellPosition } from '@/types';
 export class SelectionRange {
   constructor(public start: CellPosition, public end: CellPosition) {}
 
-  updateEnd(end: CellPosition): boolean {
+  withEnd(end: CellPosition): boolean {
     if (this.end.row === end.row && this.end.column === end.column) {
       return false;
     }

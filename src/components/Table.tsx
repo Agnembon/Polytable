@@ -1,7 +1,7 @@
-import { Cell } from '@/components/cells/Cell.tsx';
+import { Cell } from '@/components/Cell/Cell.tsx';
 import { useSelection } from '@/hooks/useSelection.ts';
 import type { CellValue, TableData } from '@/types';
-import { HeaderCell } from './cells/HeaderCell';
+import { HeaderCell } from '@/components/Cell/HeaderCell';
 
 interface TableProps {
   data: TableData;
