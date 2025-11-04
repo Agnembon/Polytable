@@ -1,22 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
-import { SelectionRange } from '@/models/SelectionRange.ts';
-import type { CellPosition } from '@/types';
+import type { CellPosition } from "@/types";
+import { SelectionRange } from "@/models/SelectionRange.ts";
 
 export const useSelection = () => {
   const [selection, setSelection] = useState<SelectionRange | null>(null);
-  const start = useRef<CellPosition | null>(null);
   const isSelecting = useRef(false);
 
   useEffect(() => {
+    const handleMouseUp = () => (isSelecting.current = false);
     window.addEventListener('mouseup', handleMouseUp);
 
     return () => window.removeEventListener('mouseup', handleMouseUp);
   }, []);
 
   const handleMouseDown = (cell: CellPosition) => {
-    start.current = cell;
     isSelecting.current = true;
-
     setSelection(new SelectionRange(cell, cell));
   };
 
@@ -28,15 +26,5 @@ export const useSelection = () => {
     }
   };
 
-  const handleMouseUp = () => {
-    isSelecting.current = false;
-    start.current = null;
-  };
-
-  return {
-    selection,
-    handleMouseDown,
-    handleMouseEnter,
-    handleMouseUp
-  };
+  return { selection, handleMouseDown, handleMouseEnter };
 };

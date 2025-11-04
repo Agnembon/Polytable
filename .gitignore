@@ -8,3 +8,7 @@
 
 node_modules/
 dist/
+
+# Local
+
+codebase.txt

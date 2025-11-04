@@ -3,12 +3,9 @@ export interface TableData {
   content: CellValue[][];
 }
 
-export interface CellValue {
-  value: string | number;
-}
+export type CellValue = string | number;
 
 export interface CellPosition {
   row: number;
   column: number;
 }
-
