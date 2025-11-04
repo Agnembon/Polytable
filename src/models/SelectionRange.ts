@@ -1,10 +1,19 @@
-import type { CellPosition } from '@/domain/vo/CellPosition.ts';
+import type { CellPosition } from '@/types';
 
 export class SelectionRange {
   constructor(
-    public readonly start: CellPosition,
-    public readonly end: CellPosition
+    public start: CellPosition,
+    public end: CellPosition
   ) {}
+
+  updateEnd(end: CellPosition): boolean {
+    if (this.end.row === end.row && this.end.column === end.column) {
+      return false;
+    }
+
+    this.end = end;
+    return true;
+  }
 
   contains(cell: CellPosition): boolean {
     return (
@@ -12,6 +21,15 @@ export class SelectionRange {
       cell.row <= this.bottomRow &&
       cell.column >= this.leftColumn &&
       cell.column <= this.rightColumn
+    );
+  }
+
+  equals(other: SelectionRange): boolean {
+    return (
+      this.start.row === other.start.row &&
+      this.start.column === other.start.column &&
+      this.end.row === other.end.row &&
+      this.end.column === other.end.column
     );
   }
 

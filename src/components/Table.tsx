@@ -1,7 +1,5 @@
-import { useState, useRef } from 'react';
 import { Cell } from '@/components/Cell.tsx';
-import { SelectionRange } from '@/domain/model/SelectionRange';
-import type { CellPosition } from '@/domain/vo/CellPosition.ts';
+import { useSelection } from '@/hooks/useSelection.ts';
 
 interface SelectableTableProps {
   rows: number;
@@ -9,35 +7,17 @@ interface SelectableTableProps {
 }
 
 export const Table = ({ rows, columns }: SelectableTableProps) => {
-  const [selection, setSelection] = useState<SelectionRange | null>(null);
-  const [isSelecting, setIsSelecting] = useState<boolean>(false);
-  const startRef = useRef<CellPosition | null>(null);
-
-  const handleMouseDown = (cell: CellPosition) => {
-    startRef.current = cell;
-    setSelection(new SelectionRange(cell, cell));
-    setIsSelecting(true);
-  };
-
-  const handleMouseEnter = (cell: CellPosition) => {
-    if (isSelecting && startRef.current) {
-      setSelection(new SelectionRange(startRef.current, cell));
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsSelecting(false);
-    startRef.current = null;
-  };
+  const { selection, handleMouseDown, handleMouseEnter, handleMouseUp } = useSelection();
 
   return (
     <div onMouseUp={handleMouseUp} className="inline-block select-none">
-      <table className="border-collapse">
+      <table className="border-collapse shadow rounded-md overflow-hidden">
         <tbody>
           {Array.from({ length: rows }).map((_, row) => (
             <tr key={row}>
               {Array.from({ length: columns }).map((_, column) => (
                 <Cell
+                  key={column}
                   position={{ row, column }}
                   isSelected={selection?.contains({ row, column }) ?? false}
                   onMouseDown={handleMouseDown}
