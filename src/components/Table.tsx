@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
-import type { Cell } from '../domain/Cell';
-import { SelectionRange } from '../domain/SelectionRange';
+import { SelectionRange } from '@/domain/model/SelectionRange';
+import type { Cell } from '@/domain/vo/Cell';
 
 interface SelectableTableProps {
   rows: number;

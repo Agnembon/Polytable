@@ -1,4 +1,4 @@
-import type { Cell } from './Cell';
+import type { Cell } from '@/domain/vo/Cell';
 
 export class SelectionRange {
   constructor(

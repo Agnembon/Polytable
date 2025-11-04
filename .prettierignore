@@ -3,20 +3,6 @@
 package.json
 dist/
 
-# Typescript
-
-tsconfig.app.json
-tsconfig.json
-tsconfig.node.json
-
-# Vite
-
-vite.config.ts
-
-# Format
-
-.prettierrc
-
 # Documentation
 
 docs/
