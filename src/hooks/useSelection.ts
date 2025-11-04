@@ -7,6 +7,12 @@ export const useSelection = () => {
   const start = useRef<CellPosition | null>(null);
   const isSelecting = useRef(false);
 
+  useEffect(() => {
+    window.addEventListener('mouseup', handleMouseUp);
+
+    return () => window.removeEventListener('mouseup', handleMouseUp);
+  }, []);
+
   const handleMouseDown = (cell: CellPosition) => {
     start.current = cell;
     isSelecting.current = true;
@@ -26,12 +32,6 @@ export const useSelection = () => {
     isSelecting.current = false;
     start.current = null;
   };
-
-  useEffect(() => {
-    window.addEventListener('mouseup', handleMouseUp);
-
-    return () => window.removeEventListener('mouseup', handleMouseUp);
-  }, []);
 
   return {
     selection,
