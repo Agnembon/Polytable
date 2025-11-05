@@ -12,3 +12,7 @@ dist/
 # Local
 
 codebase.txt
+
+# Turborepo
+
+.turbo/
