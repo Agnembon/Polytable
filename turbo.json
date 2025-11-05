@@ -2,8 +2,6 @@
   "$schema": "https://turbo.build/schema.json",
   "tasks": {
     "dev": { "cache": false },
-    "build": { "outputs": ["./dist/**"] },
-    "check:dependencies": { "cache": false },
-    "update:dependencies": { "cache": false }
+    "build": { "outputs": ["./dist/**"] }
   }
 }

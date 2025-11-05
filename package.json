@@ -8,9 +8,7 @@
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "clean": "bunx rimraf --glob '**/node_modules' '**/.turbo' '**/dist'",
-    "check:dependencies": "bunx npm-check-updates && turbo run check:dependencies",
-    "update:dependencies": "bunx npm-check-updates -u && turbo run update:dependencies"
+    "clean": "bunx rimraf --glob '**/node_modules' '**/.turbo' '**/dist'"
   },
   "devDependencies": {
     "turbo": "^2.6.0"
