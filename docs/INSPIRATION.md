@@ -1,4 +1,4 @@
-# Polygrid - Inspiration
+# Polytable - Inspiration
 
 Open-source projects to take as reference:
 
