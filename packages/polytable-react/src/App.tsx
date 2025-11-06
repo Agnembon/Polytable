@@ -11,6 +11,17 @@ export const App = () => {
     [25, 26, 'PRUEBA-27', 28, 29, 30]
   ];
 
+  const onSelectedData = (selectedData: CellValue[][]) => {
+    console.log("DATOS SELECCIONADOS --> ", selectedData)
+  };
+
+  const onSelectedData2 = (selectedData: CellValue[][]) => {
+    selectedData.forEach(row => {
+      row.forEach(column => {
+        console.log("VALOR --> ", column)
+      });
+    });
+  };
 
   return (
     <div className='p-4 flex flex-col items-center gap-30 min-h-screen'>
@@ -19,12 +30,17 @@ export const App = () => {
         <Table
           key={'polytable-header'}
           data={{ header: temporalHeaderDataExample, content: temporalContentDataExample }}
+          onSelectedData={(selectedData) => onSelectedData(selectedData)}
         />
       </div>
 
       <div className='flex flex-col items-center gap-10'>
         <h1 className='text-xl font-semibold mb-4'>POLYTABLE SIN HEADER</h1>
-        <Table key={'polytable'} data={{ header: [], content: temporalContentDataExample }} />
+        <Table 
+          key={'polytable'} 
+          data={{ header: [], content: temporalContentDataExample }} 
+          onSelectedData={(selectedData) => onSelectedData2(selectedData)}
+        />
       </div>
     </div>
   );

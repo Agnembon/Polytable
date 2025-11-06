@@ -1,4 +1,4 @@
-import type { CellPosition } from '../types';
+import type { CellPosition, CellValue } from '../types';
 
 export class SelectionRange {
   constructor(public start: CellPosition, public end: CellPosition) {}
@@ -19,5 +19,25 @@ export class SelectionRange {
       cell.column >= Math.min(this.start.column, this.end.column) &&
       cell.column <= Math.max(this.start.column, this.end.column)
     );
+  }
+
+  getValues(data: CellValue[][]): CellValue[][] {
+
+    const selected: CellValue[][] = [];
+
+    data.forEach((row: CellValue[], rowIndex: number) => {
+      const rowList: CellValue[] = [];
+      row.forEach((column: CellValue, columnIndex: number) => {
+        if(this.contains({ row: rowIndex, column: columnIndex })){
+            rowList.push(column);
+        }
+      }); 
+
+      if(rowList.length > 0){
+        selected.push(rowList);
+      }
+    });
+
+    return selected;
   }
 }

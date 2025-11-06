@@ -1,30 +1,37 @@
 import { useEffect, useRef, useState } from 'react';
-import type { CellPosition } from "../types";
+import type { CellPosition, CellValue, TableData } from "../types";
 import { SelectionRange } from "../models/SelectionRange.ts";
 
-export const useSelection = () => {
-  const [selection, setSelection] = useState<SelectionRange | null>(null);
+export const useSelection = (data?: TableData) => {
+  const [selectionRange, setSelectionRange] = useState<SelectionRange | null>(null);
+  const [selectedData, setSelectedData] = useState<CellValue[][]>([]);
   const isSelecting = useRef<boolean>(false);
 
   useEffect(() => {
-    const handleMouseUp = () => (isSelecting.current = false);
     window.addEventListener('mouseup', handleMouseUp);
 
     return () => window.removeEventListener('mouseup', handleMouseUp);
-  }, []);
+  }, [selectionRange]);
 
   const handleMouseDown = (cell: CellPosition) => {
     isSelecting.current = true;
-    setSelection(new SelectionRange(cell, cell));
+    setSelectionRange(new SelectionRange(cell, cell));
   };
 
   const handleMouseEnter = (cell: CellPosition) => {
-    if (!isSelecting.current || !selection) return;
+    if (!isSelecting.current || !selectionRange) return;
 
-    if (selection.withEnd(cell)) {
-      setSelection(new SelectionRange(selection.start, selection.end));
+    if (selectionRange.withEnd(cell)) {
+      setSelectionRange(new SelectionRange(selectionRange.start, selectionRange.end));
     }
   };
 
-  return { selection, handleMouseDown, handleMouseEnter };
+  const handleMouseUp = () => {
+    if (!isSelecting.current || !selectionRange || !data) return;
+
+    isSelecting.current = false
+    setSelectedData(selectionRange.getValues(data.content));
+  };
+
+  return { selectionRange, selectedData, handleMouseDown, handleMouseEnter };
 };

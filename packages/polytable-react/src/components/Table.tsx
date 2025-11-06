@@ -2,30 +2,33 @@ import { Cell } from './Cell/Cell.tsx';
 import { useSelection } from '../hooks/useSelection.ts';
 import type { CellValue, TableData } from '../types';
 import { HeaderCell } from './Cell/HeaderCell.tsx';
+import { useEffect } from 'react';
 
 interface TableProps {
   data: TableData;
+  onSelectedData: (selectedData: CellValue[][]) => void;
 }
 
-export const Table = ({ data }: TableProps) => {
-  const { selection, handleMouseDown, handleMouseEnter } = useSelection();
-  const hasHeader = data.header && data.header.length > 0;
+export const Table = ({ data, onSelectedData }: TableProps) => {
+  const { selectionRange, selectedData, handleMouseDown, handleMouseEnter } = useSelection(data);
   const hasContent = data.content && data.content.length > 0;
 
+  useEffect(() => {
+    onSelectedData(selectedData);
+  }, [selectedData])
+ 
   return (
     <div className='border-collapse rounded-md'>
       {hasContent
         ? (
           <table className='border-collapse rounded-md'>
-            {hasHeader && (
-              <thead>
-                <tr key={'header-row'}>
-                  {data.header.map((headerValue: CellValue, headerIndex: number) => (
-                    <HeaderCell key={headerIndex} value={headerValue} />
-                  ))}
-                </tr>
-              </thead>
-            )}
+            <thead>
+              <tr key={'header-row'}>
+                {data.header.map((headerValue: CellValue, headerIndex: number) => (
+                  <HeaderCell key={headerIndex} value={headerValue} />
+                ))}
+              </tr>
+            </thead>
             <tbody>
               {data.content.map((rowData: CellValue[], rowIndex: number) => (
                 <tr key={rowIndex}>
@@ -34,7 +37,7 @@ export const Table = ({ data }: TableProps) => {
                       key={columnIndex}
                       value={columnValue}
                       position={{ row: rowIndex, column: columnIndex }}
-                      isSelected={selection?.contains({ row: rowIndex, column: columnIndex }) ?? false}
+                      isSelected={selectionRange?.contains({ row: rowIndex, column: columnIndex }) ?? false}
                       onMouseDown={handleMouseDown}
                       onMouseEnter={handleMouseEnter}
                     />
