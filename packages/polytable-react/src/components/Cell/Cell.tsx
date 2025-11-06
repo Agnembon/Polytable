@@ -1,4 +1,4 @@
-import type { CellPosition, CellValue } from '../../types';
+import type { CellPosition, CellValue } from '@/types';
 
 interface CellProps {
   value: CellValue;

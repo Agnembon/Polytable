@@ -1,4 +1,4 @@
-import type { CellValue } from '../../types';
+import type { CellValue } from '@/types';
 
 interface HeaderCellProps {
   value: CellValue;
