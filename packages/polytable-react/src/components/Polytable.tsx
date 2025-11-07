@@ -1,51 +1,25 @@
 import type { CellValue, Table } from "@/types";
 import { useSelection } from "@/hooks/useSelection";
-import { computeSelectionBounds, isWithinSelectionBounds } from "@/models/SelectionBounds.ts";
-import { HeaderCell } from "@/components/HeaderCell";
-import { Cell } from "@/components/Cell";
+import { Body } from "@/components/Body.tsx";
+import { Header } from "@/components/Header.tsx";
 
 interface PolytableProps {
-  data: Table;
-  onSelectionChange?: (selectedData: CellValue[][]) => void;
+  table: Table;
+  onSelectionChange?: (selectedCells: CellValue[][]) => void;
 }
 
-export const Polytable = ({data, onSelectionChange}: PolytableProps) => {
-  const { selectionRange, handleMouseDown, handleMouseEnter } = useSelection(data, onSelectionChange);
-  const bounds = selectionRange ? computeSelectionBounds(selectionRange.start, selectionRange.end) : null;
+export const Polytable = ({ table, onSelectionChange }: PolytableProps) => {
+  const { selectionRange, handleMouseDown, handleMouseEnter } = useSelection(table, onSelectionChange);
 
   return (
     <table className="border-collapse rounded-md">
-      {data.header && data.header.length > 0 && (
-        <thead>
-        <tr>
-          {data.header.map((value, index) => (
-            <HeaderCell key={index} value={value} />
-          ))}
-        </tr>
-        </thead>
-      )}
-
-      <tbody>
-      {data.content.map((row, rowIndex) => (
-        <tr key={rowIndex}>
-          {row.map((value, columnIndex) => {
-            const position = { row: rowIndex, column: columnIndex };
-            const isSelected = bounds ? isWithinSelectionBounds(position, bounds) : false;
-
-            return (
-              <Cell
-                key={columnIndex}
-                value={value}
-                coordinates={position}
-                isSelected={isSelected}
-                onMouseDown={handleMouseDown}
-                onMouseEnter={handleMouseEnter}
-              />
-            );
-          })}
-        </tr>
-      ))}
-      </tbody>
+      <Header cells={table.header} />
+      <Body
+        content={table.content}
+        selectionRange={selectionRange}
+        onMouseDown={handleMouseDown}
+        onMouseEnter={handleMouseEnter}
+      />
     </table>
-  );
+  )
 };

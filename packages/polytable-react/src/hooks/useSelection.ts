@@ -1,39 +1,42 @@
 import { useEffect, useRef, useState } from "react";
 import type { CellCoordinates, CellValue, Table } from "@/types";
-import { extendSelectionRange, initializeSelectionRange, type SelectionRange } from "@/models/SelectionRange.ts";
-import { computeSelectionBounds, extractValuesWithinSelectionBounds } from "@/models/SelectionBounds.ts";
+import { extractValuesWithinSelectionBounds } from "@/models/SelectionBounds.ts";
+import { SelectionRange } from "@/models/SelectionRange.ts";
 
 export function useSelection(table?: Table, onSelection?: (values: CellValue[][]) => void) {
     const [selectionRange, setSelectionRange] = useState<SelectionRange | null>(null);
     const isSelecting = useRef(false);
 
     useEffect(() => {
-        window.addEventListener("mouseup", handleMouseUp);
+        const onMouseUp = () => {
+            if (!isSelecting.current || !selectionRange || !table) {
+                return;
+            }
 
-        return () => window.removeEventListener("mouseup", handleMouseUp);
+            isSelecting.current = false;
+
+            const selectionBounds = selectionRange.selectionBounds();
+            const values = extractValuesWithinSelectionBounds(table.content, selectionBounds);
+
+            onSelection?.(values);
+        }
+
+        window.addEventListener("mouseup", onMouseUp)
+        return () => window.removeEventListener("mouseup", onMouseUp)
     });
 
     const handleMouseDown = (position: CellCoordinates) => {
         isSelecting.current = true;
-        setSelectionRange(initializeSelectionRange(position));
-    };
+        setSelectionRange(new SelectionRange(position, position));
+    }
 
     const handleMouseEnter = (position: CellCoordinates) => {
-        if (!isSelecting.current || !selectionRange) return;
+        if (!isSelecting.current || !selectionRange) {
+            return;
+        }
 
-        setSelectionRange(extendSelectionRange(selectionRange, position));
-    };
-
-    const handleMouseUp = () => {
-        if (!isSelecting.current || !selectionRange || !table) return;
-
-        isSelecting.current = false;
-
-        const selectionBounds = computeSelectionBounds(selectionRange.start, selectionRange.end);
-        const values = extractValuesWithinSelectionBounds(table.content, selectionBounds);
-
-        onSelection?.(values);
-    };
+        setSelectionRange(selectionRange.withEnd(position));
+    }
 
     return { selectionRange, handleMouseDown, handleMouseEnter };
 }

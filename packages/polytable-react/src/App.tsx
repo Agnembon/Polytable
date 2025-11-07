@@ -33,7 +33,7 @@ export const App = () => {
                 <h1 className='text-xl font-semibold mb-4'>POLYTABLE CON HEADER</h1>
                 <Polytable
                     key={'polytable-header'}
-                    data={{header: temporalHeaderDataExample, content: temporalContentDataExample}}
+                    table={{header: temporalHeaderDataExample, content: temporalContentDataExample}}
                     onSelectionChange={setSelectedData1}
                 />
                 <p>{selectedData1.join(" - ")}</p>
@@ -43,7 +43,7 @@ export const App = () => {
                 <h1 className='text-xl font-semibold mb-4'>POLYTABLE SIN HEADER</h1>
                 <Polytable
                     key={'polytable'}
-                    data={{header: [], content: temporalContentDataExample}}
+                    table={{header: [], content: temporalContentDataExample}}
                     onSelectionChange={setSelectedData2}
                 />
                 <p>{selectedData2.join(" / ")}</p>
