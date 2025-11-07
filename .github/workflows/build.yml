@@ -1,0 +1,19 @@
+name: 🧱 Build Pipeline
+
+on:
+  push:
+    branches: ["**"]
+
+jobs:
+  build:
+    name: 🔧 Build Project
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+      - name: ⚡ Setup Bun
+        uses: oven-sh/setup-bun@v1
+      - name: 📦 Install dependencies
+        run: bun install
+      - name: 🏗️ Run build
+        run: bun run build
