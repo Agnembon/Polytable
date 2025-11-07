@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import type { CellCoordinates, CellValue } from "@/types";
-import { extractValuesWithinSelectionBounds } from "@/models/SelectionBounds.ts";
-import { SelectionRange } from "@/models/SelectionRange.ts";
+import type { CellCoordinates, CellValue } from "@/core/types";
+import { extractValuesWithinSelectionBounds } from "@/core/SelectionBounds.ts";
+import { SelectionRange } from "@/core/SelectionRange.ts";
 
 export const useSelectionRange = (body?: CellValue[][], onSelection?: (values: CellValue[][]) => void) => {
   const [selectionRange, setSelectionRange] = useState<SelectionRange | null>(null);

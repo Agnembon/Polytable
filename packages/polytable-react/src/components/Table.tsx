@@ -1,4 +1,4 @@
-import type { CellValue, TableShape } from "@/types";
+import type { CellValue, TableShape } from "@/core/types";
 import { useSelectionRange } from "@/hooks/useSelectionRange.ts";
 import { Body } from "@/components/Body.tsx";
 import { Header } from "@/components/Header.tsx";

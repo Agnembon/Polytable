@@ -1,4 +1,4 @@
-import type { CellValue } from "@/types";
+import type { CellValue } from "@/core/types";
 import { HeaderCell } from "@/components/HeaderCell.tsx";
 
 interface HeaderProps {

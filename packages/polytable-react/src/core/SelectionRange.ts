@@ -1,5 +1,5 @@
-import type { CellCoordinates } from "@/types";
-import type { SelectionBounds } from "@/models/SelectionBounds.ts";
+import type { CellCoordinates } from "@/core/types";
+import type { SelectionBounds } from "@/core/SelectionBounds.ts";
 
 export class SelectionRange {
 
