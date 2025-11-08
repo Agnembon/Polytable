@@ -7,7 +7,7 @@ updates:
       interval: "weekly"
       day: "monday"
   - package-ecosystem: "bun"
-    directory: "/packages/polytable-react"
+    directory: "/packages/polytable-react-package"
     schedule:
       interval: "weekly"
       day: "monday"

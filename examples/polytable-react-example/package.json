@@ -1,5 +1,5 @@
 {
-  "name": "@polytable/react",
+  "name": "@polytable/react-example",
   "private": true,
   "version": "1.0.0",
   "type": "module",
@@ -9,10 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.16",
+    "@polytable/react-package": "workspace:*",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "tailwindcss": "^4.1.16"
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@types/node": "^24.10.0",

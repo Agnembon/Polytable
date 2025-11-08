@@ -4,7 +4,10 @@
   "version": "1.0.0",
   "type": "module",
   "packageManager": "bun@1.3.1",
-  "workspaces": ["./packages/*"],
+  "workspaces": [
+    "./packages/*",
+    "./examples/*"
+  ],
   "scripts": {
     "dev": "turbo run dev",
     "build": "turbo run build",
