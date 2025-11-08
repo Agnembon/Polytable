@@ -34,7 +34,7 @@ export class SelectionRange {
     return values;
   }
 
-  get selectionBounds(): SelectionBounds {
+  private get selectionBounds(): SelectionBounds {
     return {
       top: Math.min(this.start.row, this.end.row),
       bottom: Math.max(this.start.row, this.end.row),
