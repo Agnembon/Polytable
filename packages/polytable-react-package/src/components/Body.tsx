@@ -1,6 +1,6 @@
 import type { CellValue, CellCoordinates } from "@/core/types"
 import { Cell } from "@/components/Cell"
-import type { SelectionRange } from "@/core/SelectionRange.ts"
+import type { SelectionRange } from "@/core/SelectionRange"
 
 interface BodyProps {
   rows: CellValue[][]

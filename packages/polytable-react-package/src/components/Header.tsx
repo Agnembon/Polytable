@@ -1,5 +1,5 @@
 import type { CellValue } from "@/core/types";
-import { HeaderCell } from "@/components/HeaderCell.tsx";
+import { HeaderCell } from "@/components/HeaderCell";
 
 interface HeaderProps {
   columns: CellValue[];

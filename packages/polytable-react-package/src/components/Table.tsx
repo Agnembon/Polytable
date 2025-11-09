@@ -1,7 +1,7 @@
 import type { CellValue, TableShape } from "@/core/types";
-import { useSelectionRange } from "@/hooks/useSelectionRange.ts";
-import { Body } from "@/components/Body.tsx";
-import { Header } from "@/components/Header.tsx";
+import { useSelectionRange } from "@/hooks/useSelectionRange";
+import { Body } from "@/components/Body";
+import { Header } from "@/components/Header";
 
 interface Table {
   shape: TableShape;

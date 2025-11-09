@@ -1,4 +1,5 @@
 import { Table } from "@polytable/react-package";
+import type { CellValue } from "@polytable/react-package";
 
 export const App = () => {
   const columns = ["A", "B", "C"];
@@ -7,7 +8,7 @@ export const App = () => {
   return (
     <Table
       shape={{ columns, rows }}
-      onSelectionChange={selection => console.log(selection)}
+      onSelectionChange={(selection: CellValue[][]) => console.log(selection)}
     />
   );
 };
