@@ -1,5 +1,4 @@
-import type { CellCoordinates, CellValue } from "@/core/types";
-import type { SelectionBounds } from "@/core/SelectionBounds";
+import type { CellCoordinates, CellValue, SelectionBounds } from "@/core/types";
 
 export class SelectionRange {
 
