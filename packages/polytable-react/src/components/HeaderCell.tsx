@@ -5,7 +5,7 @@ interface HeaderCellProps {
 }
 
 export const HeaderCell = ({ value }: HeaderCellProps) => (
-  <td className={`w-30 h-8 border border-gray-300 text-center select-none font-bold bg-gray-100 text-gray-800`}>
+  <td className={`min-w-30 font-medium px-3 py-2 text-gray-800 select-none`}>
     {value}
   </td>
 );

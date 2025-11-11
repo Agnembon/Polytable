@@ -12,8 +12,8 @@ export const Cell = ({ value, coordinates, isSelected, onMouseDown, onMouseEnter
   <td
     onMouseDown={() => onMouseDown(coordinates)}
     onMouseEnter={() => onMouseEnter(coordinates)}
-    className={`w-30 h-8 border border-gray-300 text-center cursor-pointer select-none ${
-      isSelected ? 'bg-blue-200' : 'bg-white hover:bg-gray-100'
+    className={`min-w-30 px-3 py-2 cursor-pointer select-none ${
+      isSelected ? 'bg-blue-200/60' : 'hover:bg-slate-200'
     }`}
   >
     {value}
