@@ -4,13 +4,13 @@ import type { Key } from "react";
 
 interface HeaderProps {
   key: Key;
-  columns: CellValue[];
+  cells: CellValue[];
 }
 
-export const Header = ({ key, columns }: HeaderProps) => (
-  <thead key={key}>
-    <tr key={`row-${key}`}>
-      {columns.map((value: CellValue, index: number) => (
+export const Header = ({ key, cells }: HeaderProps) => (
+  <thead key={`header-${key}`}>
+    <tr key={`header-cells-${key}`}>
+      {cells.map((value: CellValue, index: number) => (
         <HeaderCell key={index} value={value} />
       ))}
     </tr>

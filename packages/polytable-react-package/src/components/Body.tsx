@@ -12,7 +12,7 @@ interface BodyProps {
 }
 
 export const Body = ({ key, rows, selectionRange, onMouseDown, onMouseEnter }: BodyProps) => (
-  <tbody key={key}>
+  <tbody key={`body-${key}`}>
     {rows.map((row, rowIndex) => (
       <tr key={`row-${key}-${rowIndex}`}>
         {row.map((value, columnIndex) => {

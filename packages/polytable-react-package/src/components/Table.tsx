@@ -15,9 +15,9 @@ export const Table = ({ key, shape, onSelectionChange }: Table) => {
 
   return (
     <table key={key} className="border-collapse rounded-md">
-      <Header key={`${key}-header`} columns={shape.columns} />
+      <Header key={key} cells={shape.columns} />
       <Body
-        key={`${key}-body`}
+        key={key}
         rows={shape.rows}
         selectionRange={selectionRange}
         onMouseDown={handleMouseDown}
