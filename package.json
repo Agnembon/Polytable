@@ -11,6 +11,6 @@
     "clean": "bunx rimraf --glob '**/node_modules' '**/.turbo' '**/dist'"
   },
   "devDependencies": {
-    "turbo": "^2.6.0"
+    "turbo": "^2.6.1"
   }
 }

@@ -14,6 +14,7 @@ export const App = () => {
       <div className='flex flex-col items-center gap-10'>
         <h1 className='text-xl font-semibold mb-4'>POLYTABLE CON HEADER</h1>
         <Table
+          key={'table'}
           shape={{ columns, rows }}
           onSelectionChange={setSelectedData1}
         />
