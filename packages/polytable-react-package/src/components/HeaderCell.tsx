@@ -1,13 +1,11 @@
-import type { CellValue } from '@/core/types';
-import type { Key } from 'react';
+import type { CellValue } from "@/core/types";
 
 interface HeaderCellProps {
-  key: Key;
   value: CellValue;
 }
 
-export const HeaderCell = ({ key, value }: HeaderCellProps) => (
-  <td key={`header-cell-${key}`} className={`min-w-30 font-medium px-3 py-2 text-gray-800 select-none`}>
+export const HeaderCell = ({ value }: HeaderCellProps) => (
+  <th className="px-4 py-2 text-left text-gray-700 font-semibold select-nonewhitespace-nowrap">
     {value}
-  </td>
+  </th>
 );

@@ -1,8 +1,6 @@
-import type { CellCoordinates, CellValue } from '@/core/types';
-import type { Key } from "react";
+import type { CellCoordinates, CellValue } from "@/core/types";
 
 interface CellProps {
-  key: Key;
   value: CellValue;
   coordinates: CellCoordinates;
   isSelected: boolean;
@@ -10,13 +8,13 @@ interface CellProps {
   onMouseEnter: (coordinates: CellCoordinates) => void;
 }
 
-export const Cell = ({ key, value, coordinates, isSelected, onMouseDown, onMouseEnter }: CellProps) => (
+export const Cell = ({ value, coordinates, isSelected, onMouseDown, onMouseEnter }: CellProps) => (
   <td
-    key={key}
     onMouseDown={() => onMouseDown(coordinates)}
     onMouseEnter={() => onMouseEnter(coordinates)}
-    className={`min-w-30 px-3 py-2 cursor-pointer select-none ${
-      isSelected ? 'bg-blue-200/60' : 'hover:bg-slate-200'
+    className={`px-4 py-2 select-none cursor-pointer border-b border-gray-100 transition-colors duration-75 ${isSelected
+      ? "bg-indigo-100/40"
+      : "hover:bg-gray-100"
     }`}
   >
     {value}

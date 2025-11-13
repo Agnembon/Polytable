@@ -1,33 +1,38 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { CellCoordinates, CellValue } from "@/core/types";
 import { SelectionRange } from "@/core/SelectionRange";
 
-export const useSelectionRange = (body?: CellValue[][], onSelection?: (values: CellValue[][]) => void) => {
+export const useSelectionRange = (body?: CellValue[][], onSelection?: (cells: CellValue[][]) => void) => {
   const [selectionRange, setSelectionRange] = useState<SelectionRange | null>(null);
   const isSelecting = useRef(false);
 
-  useEffect(() => {
-    window.addEventListener("mouseup", handleMouseUp)
-    return () => window.removeEventListener("mouseup", handleMouseUp)
-  });
-
-  const handleMouseDown = (position: CellCoordinates) => {
-    isSelecting.current = true;
-    setSelectionRange(new SelectionRange(position, position));
-  }
-
-  const handleMouseEnter = (position: CellCoordinates) => {
-    if (!isSelecting.current || !selectionRange) return;
-
-    setSelectionRange(selectionRange.withEnd(position));
-  }
-
-  const handleMouseUp = () => {
-    if (!isSelecting.current || !selectionRange || !body) return;
+  const handleMouseUp = useCallback(() => {
+    if (!isSelecting.current || !selectionRange || !body) {
+      return;
+    }
 
     isSelecting.current = false;
     onSelection?.(selectionRange.pick(body));
-  };
+  }, [selectionRange, onSelection, body]);
+
+  useEffect(() => {
+    window.addEventListener("mouseup", handleMouseUp);
+
+    return () => window.removeEventListener("mouseup", handleMouseUp);
+  }, [handleMouseUp]);
+
+  const handleMouseDown = useCallback((position: CellCoordinates) => {
+    isSelecting.current = true;
+    setSelectionRange(new SelectionRange(position, position));
+  }, []);
+
+  const handleMouseEnter = useCallback((position: CellCoordinates) => {
+    if (!isSelecting.current || !selectionRange) {
+      return;
+    }
+
+    setSelectionRange(selectionRange.withEnd(position));
+  }, [selectionRange]);
 
   return { selectionRange, handleMouseDown, handleMouseEnter };
-}
+};
