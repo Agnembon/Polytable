@@ -6,7 +6,7 @@ interface HeaderProps {
 }
 
 export const Header = ({ cells }: HeaderProps) => (
-  <thead className="bg-indigo-200">
+  <thead className="bg-gray-50 border-b border-gray-200">
     <tr>
       {cells.map((value, index) => (
         <HeaderCell key={index} value={value} />

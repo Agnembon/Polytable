@@ -12,7 +12,7 @@ interface BodyProps {
 export const Body = ({ rows, selectionRange, onMouseDown, onMouseEnter }: BodyProps) => (
   <tbody>
     {rows.map((row, rowIndex) => (
-      <tr key={rowIndex} className={rowIndex % 2 ? "bg-slate-100" : undefined}>
+      <tr key={rowIndex} className={rowIndex % 2 ? "bg-gray-50" : "bg-white"}>
         {row.map((value, columnIndex) => {
           const coordinates = { row: rowIndex, column: columnIndex };
           const isSelected = selectionRange?.contains(coordinates) ?? false;
