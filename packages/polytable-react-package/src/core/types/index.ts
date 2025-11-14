@@ -1,4 +1,6 @@
 export type CellValue = string | number;
+export type ColumnName = string;
+export type ColumnData = CellValue[];
 
 export interface CellCoordinates {
   row: number;
@@ -13,5 +15,5 @@ export interface SelectionBounds {
 }
 
 export interface TableShape {
-  data: Record<CellValue, CellValue[]>;
+  columns: Record<ColumnName, ColumnData>;
 }

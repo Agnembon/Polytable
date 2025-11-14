@@ -1,9 +1,9 @@
+import { useMemo } from "react";
 import type { CellValue, TableShape } from "@/core/types";
-import { Normalizer } from "@/core/Normalizer";
 import { useSelectionRange } from "@/hooks/useSelectionRange";
 import { Body } from "@/components/Body";
 import { Header } from "@/components/Header";
-import { useMemo } from "react";
+import { transposeColumns } from "@/utilities/transposeColumns.ts";
 
 interface TableProps {
   shape: TableShape;
@@ -11,19 +11,12 @@ interface TableProps {
 }
 
 export const Table = ({ shape, onSelectionChange }: TableProps) => {
-  const normalizer = useMemo(
-    () => new Normalizer(), 
-    []
-  );
-  const rows = useMemo(
-    () => normalizer.columnsToRows(shape.data),
-    [shape.data, normalizer]
-  );
+  const rows = useMemo(() => transposeColumns(shape.columns), [shape.columns]);
   const { selectionRange, handleMouseDown, handleMouseEnter } = useSelectionRange(rows, onSelectionChange);
 
   return (
     <table className="border-separate border-spacing-0 rounded-xl overflow-hidden text-sm text-gray-800 bg-white shadow-sm">
-      <Header cells={Object.keys(shape.data)} />
+      <Header cells={Object.keys(shape.columns)} />
       <Body
         rows={rows}
         selectionRange={selectionRange}
