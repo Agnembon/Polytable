@@ -5,7 +5,7 @@ import { useState } from "react";
 export const App = () => {
 
   const columns: TableShape = {
-    data: {
+    columns: {
       'HEADER-1': [1, 'AGNEMBON_7', 13, 19, 25], 
       'HEADER-2': [14, 'HOLA-8', 14, 20, 26],
       'HEADER-3': ['POLYTABLE_3', 9, 'PRUEBA_15', 'PRUEBA_21', 'PRUEBA_27'], 
