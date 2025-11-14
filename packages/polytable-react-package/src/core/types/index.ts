@@ -13,6 +13,5 @@ export interface SelectionBounds {
 }
 
 export interface TableShape {
-  columns: CellValue[];
-  rows: CellValue[][];
+  data: Record<CellValue, CellValue[]>;
 }
