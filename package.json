@@ -6,8 +6,11 @@
   "packageManager": "bun@1.3.2",
   "workspaces": ["./packages/*"],
   "scripts": {
-    "dev": "turbo run dev",
+    "dev": "turbo run dev --parallel",
     "build": "turbo run build",
+    "build:types": "turbo run build:types",
+    "deps:check": "turbo run deps:check",
+    "deps:update": "turbo run deps:update",
     "clean": "bunx rimraf --glob '**/node_modules' '**/.turbo' '**/dist'"
   },
   "devDependencies": {

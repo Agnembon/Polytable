@@ -3,7 +3,7 @@ import type { CellValue, TableShape } from "@/core/types";
 import { useSelectionRange } from "@/hooks/useSelectionRange";
 import { Body } from "@/components/Body";
 import { Header } from "@/components/Header";
-import { transposeColumns } from "@/utilities/transposeColumns.ts";
+import { transposeColumns } from "@/utilities/transposeColumns";
 
 interface TableProps {
   shape: TableShape;
